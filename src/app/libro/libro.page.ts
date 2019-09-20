@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-libro',
@@ -7,12 +7,12 @@ import { NavParams, NavController } from '@ionic/angular';
   styleUrls: ['./libro.page.scss'],
 })
 export class LibroPage implements OnInit {
-  public arrayBiblioL = {};
+  public arrayBiblioL:Array<any>;
   public getValue;
-  router: any;
+  public libro:Array<any>;
+
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams
+    private route: ActivatedRoute
   ) {
     this.arrayBiblioL = [{
       id: 0,
@@ -43,16 +43,19 @@ export class LibroPage implements OnInit {
       anno: 1602
     }];
     this.getValue = "";
+    this.libro = new Array;
   }
 
   ngOnInit() {
-    this.getValue = this.navParams.get('id');
-    console.log(this.getValue);
-    this.obtenerLibro();
+    this.getValue = this.route.snapshot.paramMap.get('id'); 
+    this.libro.push(this.obtenerLibro(this.getValue));
+    
   }
 
-  obtenerLibro(){
-    
+  obtenerLibro(id){
+    let libro;
+    libro = this.arrayBiblioL.find(valor => valor.id == id);
+    return libro;
   }
 
 }

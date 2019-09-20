@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Biblioteca } from '../class/biblioteca';
-import { NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-i-biblioteca',
@@ -10,9 +9,7 @@ import { NavParams } from '@ionic/angular';
 export class IBibliotecaPage implements OnInit {
   public arrayBiblio = {};
   
-
   constructor(
-    public navParams:NavParams
   ) {
     this.arrayBiblio = [{
       id: 0,
@@ -46,10 +43,5 @@ export class IBibliotecaPage implements OnInit {
 
   ngOnInit() {
     console.log(this.arrayBiblio);
-  }
-
-  cargarId(id) {
-    this.navParams.get(id);
-    
   }
 }
