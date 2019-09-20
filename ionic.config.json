@@ -1,5 +1,7 @@
 {
   "name": "iBiblioteca",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

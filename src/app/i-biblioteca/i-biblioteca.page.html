@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <span>
+      <ion-icon name="arrow-back" [routerLink]="['/']"></ion-icon>
+    </span>
+    <ion-title>iBiblioteca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen >
+  <ion-item *ngFor="let items of arrayBiblio" [routerLink]="['libro/',items.id]" (click)="cargarId(items.id);">
+    <ion-thumbnail slot="start" >
+      <img src="../../assets/img/{{items.titulo}}.jpg">
+    </ion-thumbnail>
+    <ion-label>
+      <h3>{{items.titulo}}</h3>
+      <p>Autor: {{items.autor}}</p>
+      <p>Año: {{items.anno}}</p>
+    </ion-label>
+  </ion-item>
+</ion-content>
+<!---->
