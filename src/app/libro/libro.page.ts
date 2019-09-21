@@ -26,7 +26,7 @@ export class LibroPage implements OnInit {
       anno: 1585
     }, {
       id: 2,
-      titulo: "El Ingenioso Hidalgo Don Quijote",
+      titulo: "Don Quijote",
       autor: "Miguel de Cervantes Saavedra",
       anno: 1605
     },
@@ -48,8 +48,8 @@ export class LibroPage implements OnInit {
 
   ngOnInit() {
     this.getValue = this.route.snapshot.paramMap.get('id'); 
-    this.libro.push(this.obtenerLibro(this.getValue));
-    
+    this.libro = this.obtenerLibro(this.getValue);
+    console.log(this.libro['titulo']);
   }
 
   obtenerLibro(id){

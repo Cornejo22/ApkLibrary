@@ -23,7 +23,7 @@ export class IBibliotecaPage implements OnInit {
       anno: 1585
     }, {
       id: 2,
-      titulo: "El Ingenioso Hidalgo Don Quijote",
+      titulo: "Don Quijote",
       autor: "Miguel de Cervantes Saavedra",
       anno: 1605
     },

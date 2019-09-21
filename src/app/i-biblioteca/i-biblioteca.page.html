@@ -10,7 +10,7 @@
 <ion-content fullscreen >
   <ion-item *ngFor="let items of arrayBiblio" [routerLink]="['libro/',items.id]" >
     <ion-thumbnail slot="start" >
-      <img src="../../assets/img/{{items.titulo}}.jpg">
+      <ion-img src="../../assets/img/{{items.titulo}}.jpg"></ion-img>
     </ion-thumbnail>
     <ion-label>
       <h3>{{items.titulo}}</h3>

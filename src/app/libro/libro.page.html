@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>libro</ion-title>
+  <ion-toolbar color="primary">
+    <span>
+      <ion-icon name="arrow-back" [routerLink]="['/i-biblioteca']"></ion-icon>
+    </span>
+    <ion-title>{{libro.titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content fullscreen>
+  <ion-thumbnail slot="start">
+      <ion-img src="../../assets/img/{{libro.titulo}}.jpg"></ion-img>
+  </ion-thumbnail>
 </ion-content>
