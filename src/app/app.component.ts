@@ -13,7 +13,7 @@ import { timer } from 'rxjs';
 })
 export class AppComponent {
 
-  showSplash = true;
+  //showSplash = true;
 
   constructor(
     private platform: Platform,
@@ -29,7 +29,7 @@ export class AppComponent {
 
       this.statusBar.show();
       this.splashScreen.hide();
-      timer(3000).subscribe(() => this.showSplash = false);
+      //timer(3000).subscribe(() => this.showSplash = false);
     });
 
   }

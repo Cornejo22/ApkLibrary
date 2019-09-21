@@ -1,41 +1,49 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title >
+    <ion-title>
       Inicio
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Bienvenido a iBiblioteca!</ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content>
-        iBiblioteca es una aplicación desarrollada con Ionic que permite gestionar una iBiblioteca
-        de un centro educativo. Para acceder a la biblioteca pulsa en el siguiente boton:
-      </ion-card-content>
+<div class="spinner" *ngIf="showSplash;else notShowSplash">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
 
-      <ion-footer [routerLink]="['/i-biblioteca']">
-        <ion-icon name="school"></ion-icon> Acceso a iBiblioteca
-      </ion-footer>
-    </ion-card>
+<ng-template #notShowSplash>
+  <ion-content>
+    <div class="ion-padding">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Bienvenido a iBiblioteca!</ion-card-title>
+        </ion-card-header>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Información sobre el autor</ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content>
-       Aplicación desarrollado por Miguel Cornejo
-      </ion-card-content>
+        <ion-card-content>
+          iBiblioteca es una aplicación desarrollada con Ionic que permite gestionar una iBiblioteca
+          de un centro educativo. Para acceder a la biblioteca pulsa en el siguiente boton:
+        </ion-card-content>
 
-      <ion-footer [routerLink]="['/author']">
-        <ion-icon name="person"></ion-icon>Consultar información
-      </ion-footer>
-    </ion-card>
+        <ion-footer [routerLink]="['/i-biblioteca']">
+          <ion-icon name="school"></ion-icon> Acceso a iBiblioteca
+        </ion-footer>
+      </ion-card>
 
-  </div>
-</ion-content>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Información sobre el autor</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          Aplicación desarrollado por Miguel Cornejo
+        </ion-card-content>
+
+        <ion-footer [routerLink]="['/author']">
+          <ion-icon name="person"></ion-icon>Consultar información
+        </ion-footer>
+      </ion-card>
+
+
+    </div>
+  </ion-content>
+</ng-template>
