@@ -42,6 +42,6 @@ export class IBibliotecaPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.arrayBiblio);
+   
   }
 }

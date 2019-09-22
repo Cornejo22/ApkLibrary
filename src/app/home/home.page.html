@@ -1,17 +1,16 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      Inicio
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <div class="spinner" *ngIf="showSplash;else notShowSplash">
   <div class="dot1"></div>
   <div class="dot2"></div>
 </div>
 
 <ng-template #notShowSplash>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>
+        Inicio
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-content>
     <div class="ion-padding">
       <ion-card>
