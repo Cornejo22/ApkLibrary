@@ -1,36 +1,40 @@
+.splash{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00aeff;
+}
+
 .spinner {
-    margin: 100px auto;
     width: 40px;
     height: 40px;
+  
     position: relative;
-    text-align: center;
-    
-    -webkit-animation: sk-rotate 2.0s infinite linear;
-    animation: sk-rotate 2.0s infinite linear;
+    margin: 100px auto;
   }
   
-  .dot1, .dot2 {
-    width: 60%;
-    height: 60%;
-    display: inline-block;
+  .double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
     position: absolute;
     top: 0;
-    background-color: #333;
-    border-radius: 100%;
+    left: 0;
     
     -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
     animation: sk-bounce 2.0s infinite ease-in-out;
   }
   
-  .dot2 {
-    top: auto;
-    bottom: 0;
+  .double-bounce2 {
     -webkit-animation-delay: -1.0s;
     animation-delay: -1.0s;
   }
-  
-  @-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
-  @keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
   
   @-webkit-keyframes sk-bounce {
     0%, 100% { -webkit-transform: scale(0.0) }

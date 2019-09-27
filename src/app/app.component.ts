@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { timer } from 'rxjs';
 
+
+//Import por mi
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +14,8 @@ import { timer } from 'rxjs';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-
-  //showSplash = true;
+  
+  showSplash = true;
 
   constructor(
     private platform: Platform,
@@ -26,10 +28,9 @@ export class AppComponent {
   initializeApp() {
 
     this.platform.ready().then(() => {
-
       this.statusBar.show();
       this.splashScreen.hide();
-      //timer(3000).subscribe(() => this.showSplash = false);
+      timer(3000).subscribe(()=>this.showSplash = false);
     });
 
   }

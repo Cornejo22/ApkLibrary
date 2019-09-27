@@ -8,12 +8,12 @@ import { timer } from 'rxjs';
 })
 export class HomePage {
   
-  showSplash = true;
+ 
 
   constructor() { }
 
   ngOnInit() {
-    timer(3000).subscribe(() => this.showSplash = false);
+   
   }
 
 }

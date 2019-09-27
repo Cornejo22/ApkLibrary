@@ -1,5 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Biblioteca } from '../class/biblioteca';
+import { ActivatedRoute, Router } from '@angular/router';
+
+//Class or Models
+import { Libros } from '../class/libros';
+
+//Services
+import { LibrosService } from '../services/libros.service';
+
+import { HTTP } from '@ionic-native/http/ngx';
+import { HttpClient } from '@angular/common/http';
+import { Platform, LoadingController } from '@ionic/angular';
+import { from } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-i-biblioteca',
@@ -7,41 +20,73 @@ import { Biblioteca } from '../class/biblioteca';
   styleUrls: ['./i-biblioteca.page.scss'],
 })
 export class IBibliotecaPage implements OnInit {
-  public arrayBiblio = {};
-  
+  data = [];
+  arrayBiblio = [];
   constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _librosService: LibrosService,
+    private httpC: HttpClient,
+    private nativeHttp: HTTP,
+    private plt: Platform,
+    private loadingCtrl: LoadingController
   ) {
-    this.arrayBiblio = [{
-      id: 0,
-      titulo: "La Colmena",
-      autor: "Camilo José Cela Trulock",
-      anno: 1951
-    }, {
-      id: 1,
-      titulo: "La Galatea",
-      autor: "Miguel de Cervantes Saavedra",
-      anno: 1585
-    }, {
-      id: 2,
-      titulo: "Don Quijote",
-      autor: "Miguel de Cervantes Saavedra",
-      anno: 1605
-    },
-    {
-      id: 3,
-      titulo: "La Dorotea",
-      autor: "Félix Lope de Vega y Carpio",
-      anno: 1632
-    },
-    {
-      id: 4,
-      titulo: "La Dragontea",
-      autor: "Félix Lope de Vega y Carpio",
-      anno: 1602
-    }];
   }
 
   ngOnInit() {
-   
+    this.getLibros();
+    //this.getDataEverywhere();
   }
+
+  getLibros() {
+    this._librosService.getLibros().subscribe(
+      result => { 
+        this.arrayBiblio = result['data'];
+      },
+      error => {  
+        console.log(<any>error);
+      }
+    );
+    
+  }
+
+  async getDataStandard() {
+    let loading = await this.loadingCtrl.create();
+    await loading.present();
+
+    this.httpC.get('http://localhost/ionic/iBibliotecaPhp/index.php').pipe(
+      finalize(() => loading.dismiss())
+    )
+      .subscribe(data => {
+        this.data = data['results'];
+        console.log(this.data);
+      }, err => {
+        console.log('JS Call error: ', err);
+      });
+  }
+
+  async getDataNativeHttp() {
+    let loading = await this.loadingCtrl.create();
+    await loading.present();
+
+    // Returns a promise, need to convert with of() to Observable (if want)!
+    from(this.nativeHttp.get('http://localhost/ionic/iBibliotecaPhp/index.php', {}, { 'Content-Type': 'application/json' })).pipe(
+      finalize(() => loading.dismiss())
+    ).subscribe(data => {
+      let parsed = JSON.parse(data.data);
+      this.data = parsed.results;
+      console.log(this.data);
+    }, err => {
+      console.log('Native Call error: ', err);
+    });
+  }
+
+  getDataEverywhere() {
+    if (this.plt.is('cordova')) {
+      this.getDataNativeHttp();
+    } else {
+      this.getDataStandard();
+    }
+  }
+
 }
