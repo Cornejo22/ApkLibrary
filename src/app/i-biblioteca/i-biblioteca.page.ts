@@ -22,6 +22,7 @@ import { finalize } from 'rxjs/operators';
 export class IBibliotecaPage implements OnInit {
   data = [];
   arrayBiblio = [];
+  public list;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -31,24 +32,36 @@ export class IBibliotecaPage implements OnInit {
     private plt: Platform,
     private loadingCtrl: LoadingController
   ) {
+
   }
 
   ngOnInit() {
     this.getLibros();
-    //this.getDataEverywhere();
   }
 
   getLibros() {
     this._librosService.getLibros().subscribe(
-      result => { 
+      result => {
+        console.log(<any>result);
         this.arrayBiblio = result['data'];
+
       },
-      error => {  
+      error => {
+        console.log("errpr");
         console.log(<any>error);
       }
     );
-    
+
   }
+
+  doRefresh(event) {
+    setTimeout(() => {
+      this.getLibros();
+      event.target.complete();
+    }, 2000);
+  }
+
+  //Esto son pruebas
 
   async getDataStandard() {
     let loading = await this.loadingCtrl.create();

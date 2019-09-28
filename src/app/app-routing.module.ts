@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'i-biblioteca', loadChildren: './i-biblioteca/i-biblioteca.module#IBibliotecaPageModule' },
   { path: 'curriculum', loadChildren: './curriculum/curriculum.module#CurriculumPageModule' },
   { path: 'i-biblioteca/libro/:id', loadChildren: './libro/libro.module#LibroPageModule' },
-  { path: '**', loadChildren: './error/error.module#ErrorPageModule' }
+  { path: '**', loadChildren: './error/error.module#ErrorPageModule' },
 ];
 
 @NgModule({
