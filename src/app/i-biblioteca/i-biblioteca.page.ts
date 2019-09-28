@@ -20,9 +20,10 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./i-biblioteca.page.scss'],
 })
 export class IBibliotecaPage implements OnInit {
-  data = [];
+    
   arrayBiblio = [];
-  public list;
+
+  public error:Number;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -32,7 +33,7 @@ export class IBibliotecaPage implements OnInit {
     private plt: Platform,
     private loadingCtrl: LoadingController
   ) {
-
+    this.error = -1;//Si el error no existe
   }
 
   ngOnInit() {
@@ -42,13 +43,11 @@ export class IBibliotecaPage implements OnInit {
   getLibros() {
     this._librosService.getLibros().subscribe(
       result => {
-        console.log(<any>result);
         this.arrayBiblio = result['data'];
-
+        this.error = -1;//Si el error no existe
       },
       error => {
-        console.log("errpr");
-        console.log(<any>error);
+        this.error = 1; //Si el error existe
       }
     );
 
@@ -57,49 +56,52 @@ export class IBibliotecaPage implements OnInit {
   doRefresh(event) {
     setTimeout(() => {
       this.getLibros();
+      if(this.error === 1){
+        console.log("Error al recargar");
+      }
       event.target.complete();
     }, 2000);
   }
 
   //Esto son pruebas
 
-  async getDataStandard() {
-    let loading = await this.loadingCtrl.create();
-    await loading.present();
+  // async getDataStandard() {
+  //   let loading = await this.loadingCtrl.create();
+  //   await loading.present();
 
-    this.httpC.get('http://localhost/ionic/iBibliotecaPhp/index.php').pipe(
-      finalize(() => loading.dismiss())
-    )
-      .subscribe(data => {
-        this.data = data['results'];
-        console.log(this.data);
-      }, err => {
-        console.log('JS Call error: ', err);
-      });
-  }
+  //   this.httpC.get('http://localhost/ionic/iBibliotecaPhp/index.php').pipe(
+  //     finalize(() => loading.dismiss())
+  //   )
+  //     .subscribe(data => {
+  //       this.data = data['results'];
+  //       console.log(this.data);
+  //     }, err => {
+  //       console.log('JS Call error: ', err);
+  //     });
+  // }
 
-  async getDataNativeHttp() {
-    let loading = await this.loadingCtrl.create();
-    await loading.present();
+  // async getDataNativeHttp() {
+  //   let loading = await this.loadingCtrl.create();
+  //   await loading.present();
 
-    // Returns a promise, need to convert with of() to Observable (if want)!
-    from(this.nativeHttp.get('http://localhost/ionic/iBibliotecaPhp/index.php', {}, { 'Content-Type': 'application/json' })).pipe(
-      finalize(() => loading.dismiss())
-    ).subscribe(data => {
-      let parsed = JSON.parse(data.data);
-      this.data = parsed.results;
-      console.log(this.data);
-    }, err => {
-      console.log('Native Call error: ', err);
-    });
-  }
+  //   // Returns a promise, need to convert with of() to Observable (if want)!
+  //   from(this.nativeHttp.get('http://localhost/ionic/iBibliotecaPhp/index.php', {}, { 'Content-Type': 'application/json' })).pipe(
+  //     finalize(() => loading.dismiss())
+  //   ).subscribe(data => {
+  //     let parsed = JSON.parse(data.data);
+  //     this.data = parsed.results;
+  //     console.log(this.data);
+  //   }, err => {
+  //     console.log('Native Call error: ', err);
+  //   });
+  // }
 
-  getDataEverywhere() {
-    if (this.plt.is('cordova')) {
-      this.getDataNativeHttp();
-    } else {
-      this.getDataStandard();
-    }
-  }
+  // getDataEverywhere() {
+  //   if (this.plt.is('cordova')) {
+  //     this.getDataNativeHttp();
+  //   } else {
+  //     this.getDataStandard();
+  //   }
+  // }
 
 }

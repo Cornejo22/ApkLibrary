@@ -30,19 +30,29 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
       refreshingText="Refreshing..."></ion-refresher-content>
   </ion-refresher>
-  <ion-list *ngIf="arrayBiblio;else notExist">
-    <ion-item *ngFor="let items of arrayBiblio" [routerLink]="['libro/',items.id]">
-      <ion-thumbnail slot="start">
-        <ion-img src="../../assets/img/{{items.titulo}}.jpg"></ion-img>
-      </ion-thumbnail>
-      <ion-label>
-        <h3>{{items.titulo}}</h3>
-        <p>Autor: {{items.autor}}</p>
-        <p>Año: {{items.anno}}</p>
-      </ion-label>
-    </ion-item> 
-  </ion-list>
-  <ng-template #notExist>
-    no existe
+
+  <ion-item *ngIf="error === 1;else noHayErrores" style="text-align: center;">
+    <h3>Error 500</h3><br/>
+    <p>Desplace hacia abajo para recargar</p>
+  </ion-item>
+
+  <ng-template #noHayErrores>
+    <ion-list *ngIf="arrayBiblio?.length !== 0;else noHayLibros">
+      <ion-item *ngFor="let items of arrayBiblio" [routerLink]="['libro/',items.id]">
+        <ion-thumbnail slot="start">
+          <ion-img src="../../assets/img/{{items.titulo}}.jpg"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{items.titulo}}</h3>
+          <p>Autor: {{items.autor}}</p>
+          <p>Año: {{items.anno}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ng-template #noHayLibros>
+        <h3>No hay libros.</h3>
+        <p>Desplace hacia abajo para recargar</p>
+    </ng-template>
   </ng-template>
+
 </ion-content>
