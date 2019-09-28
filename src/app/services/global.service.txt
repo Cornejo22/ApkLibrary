@@ -1,4 +1,4 @@
 export var GLOBAL = {
-  url: 'http://tu_ip/ionic/iBibliotecaPhp/index.php',
+  url: 'http://XXX.XXX.X.XX/ionic/iBibliotecaPhp/index.php',
   header_color: 'antiquewhite'
 };
