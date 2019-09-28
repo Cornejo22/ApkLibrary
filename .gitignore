@@ -33,4 +33,4 @@ npm-debug.log*
 /resources/windows
 /www
 
-src/app/services/global.service.ts
+/src/app/services/*.ts
