@@ -32,5 +32,5 @@ npm-debug.log*
 /resources/ios
 /resources/windows
 /www
-/src/app/services
-/src/app/services
+
+src/app/services/global.service.ts
