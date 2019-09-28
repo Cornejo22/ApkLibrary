@@ -34,3 +34,4 @@ npm-debug.log*
 /www
 
 /src/app/services/*.ts
+src/app/services/global.service.ts
