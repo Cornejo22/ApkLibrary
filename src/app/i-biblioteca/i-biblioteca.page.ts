@@ -13,6 +13,8 @@ import { Platform, LoadingController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
+import * as $ from 'jquery'
+
 
 @Component({
   selector: 'app-i-biblioteca',
@@ -20,10 +22,10 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./i-biblioteca.page.scss'],
 })
 export class IBibliotecaPage implements OnInit {
-    
+
   arrayBiblio = [];
 
-  public error:Number;
+  public error: Number;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -38,6 +40,12 @@ export class IBibliotecaPage implements OnInit {
 
   ngOnInit() {
     this.getLibros();
+    $(document).ready(function () {
+      $("ion-fab-button").click(function () {
+        $(".gridSearchBar").slideToggle();
+        document.querySelector('input').value = "";
+      });
+    });
   }
 
   getLibros() {
@@ -56,11 +64,14 @@ export class IBibliotecaPage implements OnInit {
   doRefresh(event) {
     setTimeout(() => {
       this.getLibros();
-      if(this.error === 1){
+      if (this.error === 1) {
         console.log("Error al recargar");
       }
       event.target.complete();
     }, 2000);
+  }
+
+  onChangeTime(elemento) {
   }
 
   //Esto son pruebas
