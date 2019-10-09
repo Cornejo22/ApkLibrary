@@ -6,14 +6,16 @@ import { Libros } from '../class/libros';
 
 //Services
 import { LibrosService } from '../services/libros.service';
+import { AlertService } from '../services/alert.service';
 
+//Other Tools
 import { HTTP } from '@ionic-native/http/ngx';
 import { HttpClient } from '@angular/common/http';
 import { Platform, LoadingController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import * as $ from 'jquery'
+import * as $ from 'jquery';
 
 
 @Component({
@@ -33,7 +35,8 @@ export class IBibliotecaPage implements OnInit {
     private httpC: HttpClient,
     private nativeHttp: HTTP,
     private plt: Platform,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private _alertService: AlertService
   ) {
     this.error = -1;//Si el error no existe
   }
@@ -72,9 +75,36 @@ export class IBibliotecaPage implements OnInit {
   }
 
   onChangeTime(elemento) {
+
+    if (elemento.length == 0) {
+      this._alertService.presentAlert();
+    }
+    else {
+      var itemSeleccionado = this.arrayBiblio.forEach(function(item){
+        
+      console.log(item.id);
+      })
+     
+      console.log("etrnas");
+      console.log(itemSeleccionado);
+      // let idB = this.arrayBiblio[i].id;
+      // this._router.navigate(['i-biblioteca/libro/', idB]);
+      // for (let i = 0; i < this.arrayBiblio.length; i++) 
+      // {
+      //   let tituloLibro = this.arrayBiblio[i].titulo.toLowerCase();
+      //   if (tituloLibro.includes(elemento.toLowerCase())) {
+
+      //   }
+      // }
+    }
   }
 
+  // else {
+  //   this._alertService.presentAlertNotBook();
+  //   break;
+  // }
   //Esto son pruebas
+
 
   // async getDataStandard() {
   //   let loading = await this.loadingCtrl.create();
