@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { LibrosService } from './services/libros.service';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
+import { AlertService } from './services/alert.service';
+
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { HTTP } from '@ionic-native/http/ngx';
     StatusBar,
     SplashScreen,
     LibrosService,
+    AlertService,
     HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
