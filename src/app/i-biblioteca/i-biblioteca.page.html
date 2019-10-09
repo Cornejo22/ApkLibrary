@@ -16,7 +16,7 @@
     <ion-grid class="gridSearchBar" style="display: none;">
       <ion-row>
         <ion-col col-12>
-          <ion-searchbar (input)='onChangeTime($event.target.value)'></ion-searchbar>
+          <ion-searchbar (keyup.enter)='onChangeTime($event.target.value)' placeholder="Press enter to search"></ion-searchbar>
         </ion-col>
       </ion-row>
     </ion-grid>
